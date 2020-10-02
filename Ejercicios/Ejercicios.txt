@@ -1,0 +1,93 @@
+1) NOMBRE DE LAS TABLAS Y NUMERO DE REGISTROS DE CADA UNA
+
+SHOW TABLES;
+SELECT COUNT(*) FROM GRUPOS;
+_________________________________________________________________________________________________________________________________________________________________
+
+
+2) INGRESAR GRUPO DE HIERBAS EN LA TABLA GRUPOS
+
+INSERT INTO Grupos (IdGrupo,NombreGrupo) VALUES (4,'Hierbas');
+UPDATE Grupos SET IdGrupo=4 WHERE NombreGrupo='Hierbas';
+INSERT INTO Grupos (IdGrupo,NombreGrupo) VALUES (4,'Hierbas');
+_________________________________________________________________________________________________________________________________________________________________
+
+
+3) AÑADIR COLUMNA EN TABLA GRUPOS DENOMINADA CONGELADOS
+
+ALTER TABLE Grupos ADD Pais VARCHAR(93) NOT NULL;
+ALTER TABLE Grupos ADD Congelados INT NOT NULL;
+_________________________________________________________________________________________________________________________________________________________________
+
+
+4) CORREGIR ZANAORIA
+
+UPDATE Productos SET NomProducto = 'Zanahorias' WHERE IdProducto = 10;
+_________________________________________________________________________________________________________________________________________________________________
+
+
+5) AÑADIR A PRODUCTO LAS FRESAS
+
+INSERT INTO Productos (IdProducto,NomProducto,IdGrupo,Precio) VALUES (16,'Fresas',1,2.50);
+
+_________________________________________________________________________________________________________________________________________________________________
+
+
+6) KILOS DE FRUTA VENDIDOS POR FEDERICO
+
+1
+3
+6
+8
+11
+12
+14
+16
+
+SELECT SUM(Kilos) FROM Ventas WHERE `Cod Producto`=1 OR `Cod Producto`=3 OR `Cod Producto`=6 OR `Cod Producto`=8 OR `Cod Producto`=11 OR `Cod Producto`=12 OR `Cod Producto`=14 OR `Cod Producto`=16
+
+LA MENOS BUENA = SELECT SUM(Kilos) FROM Ventas WHERE (`Cod Producto`=1 OR `Cod Producto`=3 OR `Cod Producto`=6 OR `Cod Producto`=8 OR `Cod Producto`=11 OR `Cod Producto`=12 OR `Cod Producto`=14 OR `Cod Producto`=16) AND `Cod Vendedor`=13
+
+LA BUENA = SELECT SUM(Kilos) FROM Ventas JOIN Productos ON Ventas.`Cod Producto`=Productos.IdProducto WHERE Ventas.`Cod Vendedor`=13 AND Productos.IdGrupo=1
+
+TOTAL = 			6864730
+TOTAL FRUTAS = 			3490603
+VENDEDOR FEDERICO = 		496642
+VENDEDOR FEDERICO FRUTAS = 	240583
+
+_________________________________________________________________________________________________________________________________________________________________
+
+
+7) TOTAL KILOS PLATANOS VENDIDOS
+
+SELECT SUM(Kilos) FROM Ventas WHERE `Cod Producto`=6
+SELECT SUM(Kilos) FROM Ventas JOIN Productos ON Ventas.`Cod Producto`=Productos.IdProducto WHERE Productos.NomProducto='Platanos'
+502795
+
+_________________________________________________________________________________________________________________________________________________________________
+
+8) ELIMINAR REGISTRO HIERBAS
+HECHO
+_________________________________________________________________________________________________________________________________________________________________
+
+
+9) CREAR TABLA BECARIOS Y 4 EJEMPLOS
+
+Create Table Becarios
+(
+id TINYINT(4) NOT NULL AUTO_INCREMENT,
+nombre VARCHAR(8) NOT NULL,
+cumpleaños DATE NOT NULL,
+sexo CHAR(1), KEY(id)
+)
+
+INSERT INTO Becarios (`nombre`,`cumpleaños`,`sexo`) VALUES ('Pedro','1993-07-12','H')
+INSERT INTO Becarios (`nombre`,`cumpleaños`,`sexo`) VALUES ('Abascal','1994-11-15','H')
+INSERT INTO Becarios (`nombre`,`cumpleaños`,`sexo`) VALUES ('Iglesias','1995-12-20','H')
+INSERT INTO Becarios (`nombre`,`cumpleaños`,`sexo`) VALUES ('Arrimadas','1996-01-01','M')
+INSERT INTO Becarios (`nombre`,`cumpleaños`,`sexo`) VALUES ('Casado','1997-02-06','H')
+DELETE FROM Becarios WHERE `id`=1
+
+
+
+
